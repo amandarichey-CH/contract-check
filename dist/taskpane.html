@@ -248,4 +248,110 @@
 }
 .review-btn:hover { background: #1e47cc; }
 .caps-row { cursor: default; }
-.caps-row:hover { background: #f7f7fb; }</style>
+.caps-row:hover { background: #f7f7fb; }</style><style>/* ── Instance dropdown ──────────────────────────────────────── */
+.toggle-instances {
+  font-size: 11px;
+  padding: 3px 8px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg);
+  color: var(--ink-mid);
+  cursor: pointer;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+.toggle-instances:hover { background: var(--accent-dim); color: var(--accent); }
+
+.instances-dropdown {
+  display: none;
+  width: 100%;
+  border-top: 1px solid var(--border);
+  margin-top: 6px;
+  padding-top: 4px;
+}
+.instances-dropdown.open { display: block; }
+
+.instances-loading, .instances-empty {
+  padding: 8px 12px;
+  font-size: 11px;
+  color: var(--ink-light);
+}
+
+.instance-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.1s;
+}
+.instance-item:hover { background: var(--accent-dim); }
+
+.instance-num {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--ink-light);
+  min-width: 16px;
+}
+.instance-text {
+  font-size: 12px;
+  color: var(--ink);
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.jump-arrow {
+  font-size: 12px;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+/* ── Caps instance rows ─────────────────────────────────────── */
+.caps-instance {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 12px;
+  border-bottom: 1px solid var(--border);
+  gap: 8px;
+}
+.caps-instance:last-child { border-bottom: none; }
+
+.instance-actions {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.caps-replace {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border: none;
+  border-radius: 4px;
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+}
+.caps-replace:hover { background: #1e47cc; }
+
+.caps-ignore {
+  font-size: 11px;
+  padding: 3px 8px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg);
+  color: var(--ink-mid);
+  cursor: pointer;
+}
+.caps-ignore:hover { background: var(--warn-dim); color: var(--warn); }
+
+.issue-row {
+  flex-wrap: wrap;
+}
+.issue-row .instances-dropdown {
+  width: 100%;
+  flex-basis: 100%;
+}</style>
