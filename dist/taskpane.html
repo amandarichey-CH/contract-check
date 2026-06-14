@@ -1,6 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Contract Companion</title><style>/* ── Reset & tokens ─────────────────────────────────────────── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
+<!doctype html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Contract Companion</title><style>*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
       --ink:       #1a1a2e;
       --ink-mid:   #4a4a6a;
@@ -17,341 +15,68 @@
       --radius:    6px;
       --font:      'Segoe UI', system-ui, sans-serif;
     }
+    body { font-family: var(--font); font-size: 13px; color: var(--ink); background: var(--bg); line-height: 1.5; }
 
-    body {
-      font-family: var(--font);
-      font-size: 13px;
-      color: var(--ink);
-      background: var(--bg);
-      line-height: 1.5;
-    }
-
-    /* ── Header ─────────────────────────────────────────────────── */
-    .header {
-      background: var(--ink);
-      color: #fff;
-      padding: 14px 16px 12px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .header-logo {
-      width: 28px; height: 28px;
-      background: var(--accent);
-      border-radius: 5px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 14px; font-weight: 700; color: #fff;
-      flex-shrink: 0;
-    }
-    .header-title { font-size: 14px; font-weight: 600; letter-spacing: 0.01em; }
+    /* Header */
+    .header { background: var(--ink); color: #fff; padding: 14px 16px 12px; display: flex; align-items: center; gap: 10px; }
+    .header-logo { width: 28px; height: 28px; background: var(--accent); border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: #fff; flex-shrink: 0; }
+    .header-title { font-size: 14px; font-weight: 600; }
     .header-sub   { font-size: 11px; color: #aab; margin-top: 1px; }
 
-    /* ── Analyze button ─────────────────────────────────────────── */
+    /* Analyze button */
     .analyze-wrap { padding: 14px 16px; }
-
-    #btn-analyze {
-      width: 100%;
-      padding: 9px 0;
-      background: var(--accent);
-      color: #fff;
-      border: none;
-      border-radius: var(--radius);
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      letter-spacing: 0.02em;
-      transition: background 0.15s;
-      display: flex; align-items: center; justify-content: center; gap: 7px;
-    }
+    #btn-analyze { width: 100%; padding: 9px 0; background: var(--accent); color: #fff; border: none; border-radius: var(--radius); font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 7px; transition: background 0.15s; }
     #btn-analyze:hover  { background: #1e47cc; }
-    #btn-analyze:active { background: #1638aa; }
     #btn-analyze:disabled { background: #9aa8d6; cursor: default; }
 
-    /* ── Progress ───────────────────────────────────────────────── */
-    #progress {
-      display: none;
-      padding: 0 16px 14px;
-      font-size: 12px;
-      color: var(--ink-mid);
-    }
-    .progress-bar {
-      height: 3px;
-      background: var(--border);
-      border-radius: 2px;
-      margin-bottom: 6px;
-      overflow: hidden;
-    }
-    .progress-fill {
-      height: 100%;
-      background: var(--accent);
-      border-radius: 2px;
-      width: 0%;
-      transition: width 0.3s ease;
-    }
+    /* Progress */
+    #progress { display: none; padding: 0 16px 14px; font-size: 12px; color: var(--ink-mid); }
+    .progress-bar { height: 3px; background: var(--border); border-radius: 2px; margin-bottom: 6px; overflow: hidden; }
+    .progress-fill { height: 100%; background: var(--accent); border-radius: 2px; width: 0%; transition: width 0.3s ease; }
 
-    /* ── Summary row ────────────────────────────────────────────── */
-    #summary {
-      display: none;
-      padding: 0 16px 14px;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-    .summary-pill {
-      flex: 1;
-      min-width: 60px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 8px 10px;
-      text-align: center;
-    }
-    .summary-pill .count {
-      font-size: 20px;
-      font-weight: 700;
-      line-height: 1;
-      color: var(--warn);
-    }
+    /* Summary pills */
+    #summary { display: none; padding: 0 16px 14px; gap: 8px; flex-wrap: wrap; }
+    .summary-pill { flex: 1; min-width: 60px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 8px 10px; text-align: center; }
+    .summary-pill .count { font-size: 20px; font-weight: 700; line-height: 1; color: var(--warn); }
     .summary-pill .count.zero { color: var(--ok); }
-    .summary-pill .label {
-      font-size: 10px;
-      color: var(--ink-light);
-      margin-top: 3px;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
+    .summary-pill .label { font-size: 10px; color: var(--ink-light); margin-top: 3px; text-transform: uppercase; letter-spacing: 0.04em; }
 
-    /* ── Results ────────────────────────────────────────────────── */
+    /* Results */
     #results { padding: 0 16px 20px; }
-
-    .section {
-      margin-bottom: 14px;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-      background: var(--surface);
-    }
-
-    .section-header {
-      padding: 9px 12px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      cursor: pointer;
-      user-select: none;
-      background: var(--surface);
-      border-bottom: 1px solid var(--border);
-      transition: background 0.1s;
-    }
+    .section { margin-bottom: 14px; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; background: var(--surface); }
+    .section-header { padding: 9px 12px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; user-select: none; border-bottom: 1px solid var(--border); transition: background 0.1s; }
     .section-header:hover { background: var(--bg); }
-
-    .section-title {
-      font-size: 12px;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 7px;
-    }
-    .section-badge {
-      font-size: 10px;
-      font-weight: 700;
-      padding: 1px 6px;
-      border-radius: 10px;
-      background: var(--warn-dim);
-      color: var(--warn);
-    }
-    .section-badge.zero {
-      background: var(--ok-dim);
-      color: var(--ok);
-    }
-    .section-chevron {
-      font-size: 10px;
-      color: var(--ink-light);
-      transition: transform 0.2s;
-    }
+    .section-title { font-size: 12px; font-weight: 600; display: flex; align-items: center; gap: 7px; }
+    .section-badge { font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 10px; background: var(--warn-dim); color: var(--warn); }
+    .section-badge.zero { background: var(--ok-dim); color: var(--ok); }
+    .section-chevron { font-size: 10px; color: var(--ink-light); transition: transform 0.2s; }
     .section-chevron.open { transform: rotate(180deg); }
-
-    .section-body { padding: 8px 0; display: none; }
+    .section-body { display: none; }
     .section-body.open { display: block; }
 
-    .issue-row {
-      padding: 6px 12px;
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-      border-bottom: 1px solid var(--border);
-      cursor: pointer;
-      transition: background 0.1s;
-    }
+    /* Issue rows */
+    .issue-row { padding: 10px 12px; display: flex; align-items: flex-start; gap: 8px; border-bottom: 1px solid var(--border); }
     .issue-row:last-child { border-bottom: none; }
-    .issue-row:hover { background: var(--accent-dim); }
-
-    .jump-icon {
-      font-size: 13px;
-      color: var(--ink-light);
-      flex-shrink: 0;
-      padding-left: 4px;
-      transition: color 0.1s;
-    }
-    .issue-row:hover .jump-icon { color: var(--accent); }
-
-    .issue-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--warn);
-      flex-shrink: 0;
-      margin-top: 5px;
-    }
+    .issue-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--warn); flex-shrink: 0; margin-top: 5px; }
     .issue-dot.info { background: var(--accent); }
-
+    .issue-main { flex: 1; min-width: 0; }
     .issue-text { font-size: 12px; color: var(--ink); }
-    .issue-detail { font-size: 11px; color: var(--ink-light); margin-top: 1px; }
+    .issue-detail { font-size: 11px; color: var(--ink-light); margin-top: 1px; margin-bottom: 8px; }
 
-    /* ── Empty / error states ───────────────────────────────────── */
-    .empty-state {
-      padding: 24px 16px;
-      text-align: center;
-      color: var(--ink-light);
-      font-size: 12px;
-    }
+    /* Nav bar */
+    .nav-bar { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; }
+    .nav-btn { font-size: 11px; padding: 3px 8px; border-radius: 4px; border: 1px solid var(--border); background: var(--bg); color: var(--ink-mid); cursor: pointer; white-space: nowrap; transition: all 0.1s; }
+    .nav-btn:hover { background: var(--accent-dim); color: var(--accent); border-color: var(--accent); }
+    .nav-btn:disabled { opacity: 0.4; cursor: default; }
+    .nav-counter { font-size: 11px; color: var(--ink-light); min-width: 60px; text-align: center; }
+    .replace-btn { background: var(--accent); color: #fff; border-color: var(--accent); font-weight: 600; }
+    .replace-btn:hover { background: #1e47cc; }
+    .ignore-btn { color: var(--ink-light); }
+
+    /* Empty / error */
+    .empty-state { padding: 24px 16px; text-align: center; color: var(--ink-light); font-size: 12px; }
     .empty-state .icon { font-size: 28px; margin-bottom: 8px; }
+    #error-msg { display: none; margin: 0 16px 14px; padding: 10px 12px; background: var(--warn-dim); border: 1px solid #f5c0a8; border-radius: var(--radius); font-size: 12px; color: var(--warn); }
 
-    #error-msg {
-      display: none;
-      margin: 0 16px 14px;
-      padding: 10px 12px;
-      background: var(--warn-dim);
-      border: 1px solid #f5c0a8;
-      border-radius: var(--radius);
-      font-size: 12px;
-      color: var(--warn);
-    }
-
-    /* ── Footer ─────────────────────────────────────────────────── */
-    .footer {
-      padding: 10px 16px;
-      border-top: 1px solid var(--border);
-      font-size: 10px;
-      color: var(--ink-light);
-      text-align: center;
-    }</style><script defer="defer" src="taskpane.js"></script></head><body><div class="header"><div class="header-logo">CC</div><div><div class="header-title">Contract Companion</div><div class="header-sub">Legal document QC</div></div></div><div class="analyze-wrap"><button id="btn-analyze"><span>▶</span> Analyze Document</button></div><div id="progress"><div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div><span id="progress-label">Reading document…</span></div><div id="error-msg"></div><div id="summary" style="display:none; padding: 0 16px 14px; display:none; gap:8px; flex-wrap:wrap;"></div><div id="results"></div><div class="footer">Contract Companion · v1.0</div><script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script><script src="taskpane.js"></script></body></html><style>.caps-btn {
-  font-size: 11px;
-  font-weight: 600;
-  padding: 4px 10px;
-  border-radius: 4px;
-  border: none;
-  cursor: pointer;
-  flex-shrink: 0;
-}
-.review-btn {
-  background: #2d5be3;
-  color: #fff;
-}
-.review-btn:hover { background: #1e47cc; }
-.caps-row { cursor: default; }
-.caps-row:hover { background: #f7f7fb; }</style><style>/* ── Instance dropdown ──────────────────────────────────────── */
-.toggle-instances {
-  font-size: 11px;
-  padding: 3px 8px;
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  background: var(--bg);
-  color: var(--ink-mid);
-  cursor: pointer;
-  flex-shrink: 0;
-  white-space: nowrap;
-}
-.toggle-instances:hover { background: var(--accent-dim); color: var(--accent); }
-
-.instances-dropdown {
-  display: none;
-  width: 100%;
-  border-top: 1px solid var(--border);
-  margin-top: 6px;
-  padding-top: 4px;
-}
-.instances-dropdown.open { display: block; }
-
-.instances-loading, .instances-empty {
-  padding: 8px 12px;
-  font-size: 11px;
-  color: var(--ink-light);
-}
-
-.instance-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 12px;
-  cursor: pointer;
-  border-radius: 4px;
-  transition: background 0.1s;
-}
-.instance-item:hover { background: var(--accent-dim); }
-
-.instance-num {
-  font-size: 10px;
-  font-weight: 700;
-  color: var(--ink-light);
-  min-width: 16px;
-}
-.instance-text {
-  font-size: 12px;
-  color: var(--ink);
-  flex: 1;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.jump-arrow {
-  font-size: 12px;
-  color: var(--accent);
-  flex-shrink: 0;
-}
-
-/* ── Caps instance rows ─────────────────────────────────────── */
-.caps-instance {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 6px 12px;
-  border-bottom: 1px solid var(--border);
-  gap: 8px;
-}
-.caps-instance:last-child { border-bottom: none; }
-
-.instance-actions {
-  display: flex;
-  gap: 6px;
-  flex-shrink: 0;
-}
-
-.caps-replace {
-  font-size: 11px;
-  font-weight: 600;
-  padding: 3px 8px;
-  border: none;
-  border-radius: 4px;
-  background: var(--accent);
-  color: #fff;
-  cursor: pointer;
-}
-.caps-replace:hover { background: #1e47cc; }
-
-.caps-ignore {
-  font-size: 11px;
-  padding: 3px 8px;
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  background: var(--bg);
-  color: var(--ink-mid);
-  cursor: pointer;
-}
-.caps-ignore:hover { background: var(--warn-dim); color: var(--warn); }
-
-.issue-row {
-  flex-wrap: wrap;
-}
-.issue-row .instances-dropdown {
-  width: 100%;
-  flex-basis: 100%;
-}</style>
+    /* Footer */
+    .footer { padding: 10px 16px; border-top: 1px solid var(--border); font-size: 10px; color: var(--ink-light); text-align: center; }</style><script defer="defer" src="taskpane.js"></script></head><body><div class="header"><div class="header-logo">CC</div><div><div class="header-title">Contract Companion</div><div class="header-sub">Legal document QC</div></div></div><div class="analyze-wrap"><button id="btn-analyze"><span>▶</span> Analyze Document</button></div><div id="progress"><div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div><span id="progress-label">Reading document…</span></div><div id="error-msg"></div><div id="summary" style="display:none;"></div><div id="results"></div><div class="footer">Contract Companion · v1.0</div><script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script><script src="taskpane.js"></script></body></html>
